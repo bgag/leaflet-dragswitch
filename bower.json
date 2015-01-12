@@ -1,0 +1,17 @@
+{
+  "name": "leaflet-dragswitch",
+  "description": "Handler to enable/disable dragging of markers for a complete layer",
+  "homepage": "https://github.com/bgag/leaflet-dragswitch",
+  "version": "0.0.1",
+  "keywords": [
+    "leaflet",
+    "drag"
+  ],
+  "main": [
+    "leaflet.dragswitch.js"
+  ],
+  "ignore": [],
+  "dependencies": {
+    "leaflet": ">= 0.7.0"
+  }
+}
