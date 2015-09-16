@@ -9,7 +9,7 @@
 L.DragSwitch = L.Handler.extend({
   initialize: function (layer, options) {
     this._layer = layer;
-    this._options = options ? options : {};
+    this._options = options || {};
     this._enabled = false;
   },
   enable: function () {
@@ -18,8 +18,12 @@ L.DragSwitch = L.Handler.extend({
     self._enabled = true;
 
     self._layer.getLayers().forEach(function (dragLayer) {
-      if ('enabledIcon' in self._options) {
-        dragLayer.setIcon(self._options.enabledIcon);
+      if (self._options.enabledIcon) {
+        if (typeof self._options.enabledIcon === 'function') {
+          dragLayer.setIcon(self._options.enabledIcon(dragLayer));
+        } else {
+          dragLayer.setIcon(self._options.enabledIcon);
+        }
       }
 
       dragLayer.dragging.enable();
@@ -31,8 +35,12 @@ L.DragSwitch = L.Handler.extend({
     self._enabled = false;
 
     self._layer.getLayers().forEach(function (dragLayer) {
-      if ('disabledIcon' in self._options) {
-        dragLayer.setIcon(self._options.disabledIcon);
+      if (self._options.disabledIcon) {
+        if (typeof self._options.disabledIcon === 'function') {
+          dragLayer.setIcon(self._options.disabledIcon(dragLayer));
+        } else {
+          dragLayer.setIcon(self._options.disabledIcon);
+        }
       }
 
       // workaround for leaflet bug
